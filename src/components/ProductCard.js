@@ -82,7 +82,7 @@ const ProductPrice = styled.p`
 
   color: #ffefd6;
 
-  margin: 5px 0 8px;
+  margin: 10px 0 12px;
 `;
 
 const ButtonContainer = styled.div`

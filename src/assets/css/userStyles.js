@@ -17,6 +17,23 @@ const UserStyles = createGlobalStyle`
   button:focus {
     outline: orange 5px auto;
   }
+
+  input {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  input:focus {
+    outline: 3px solid #073C47;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  strong {
+    font-weight: bold;
+  }
 `;
 
 export default UserStyles;
