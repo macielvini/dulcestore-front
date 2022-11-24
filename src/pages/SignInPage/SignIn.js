@@ -5,6 +5,15 @@ import Form from "../../components/Form";
 
 export default function SignIn() {
   const [remember, setRemember] = useState(false);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  function formHandler(e) {
+    e.preventDefault();
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
   return (
     <>
@@ -12,8 +21,20 @@ export default function SignIn() {
         <FormContainer>
           <Logo>Dulce</Logo>
           <Form onSubmit={() => console.log("oi")}>
-            <input type="text" placeholder="Entre com seu e-mail" />
-            <input type="password" placeholder="Entre com a sua senha" />
+            <input
+              type="text"
+              placeholder="Entre com seu e-mail"
+              name="email"
+              value={form.email}
+              onChange={(e) => formHandler(e)}
+            />
+            <input
+              type="password"
+              placeholder="Entre com a sua senha"
+              name="password"
+              value={form.password}
+              onChange={(e) => formHandler(e)}
+            />
             <Checkbox onClick={() => setRemember(!remember)}>
               {remember ? (
                 <span className="material-symbols-rounded">check_box</span>
@@ -28,7 +49,7 @@ export default function SignIn() {
           </Form>
 
           <Link to={"/"}>
-            Ou <strong>cadastre-se</strong>
+            Não possui uma conta? <strong>Cadastre-se</strong>
           </Link>
         </FormContainer>
       </PageContainer>
@@ -40,6 +61,10 @@ const PageContainer = styled.div`
   height: 100vh;
   padding: 25px;
   background: #3e6063;
+
+  a {
+    font-size: 12px;
+  }
 `;
 
 const FormContainer = styled.div`
