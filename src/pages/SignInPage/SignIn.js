@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Form from "../../components/Form";
+import Logo from "../../components/Logo";
 
 export default function SignIn() {
   const [remember, setRemember] = useState(false);
@@ -24,7 +25,7 @@ export default function SignIn() {
     <>
       <PageContainer>
         <FormContainer>
-          <Logo>Dulce</Logo>
+          <Logo />
           <Form onSubmit={formSubmit}>
             <input
               type="text"
@@ -86,13 +87,6 @@ const FormContainer = styled.div`
   }
 
   border-radius: 20px;
-`;
-
-const Logo = styled.h1`
-  font-family: "Six Caps";
-  font-size: 100px;
-
-  color: #ffefd6;
 `;
 
 const Checkbox = styled.div`
