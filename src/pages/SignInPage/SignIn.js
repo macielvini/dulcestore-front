@@ -15,12 +15,17 @@ export default function SignIn() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function formSubmit(e) {
+    e.preventDefault();
+    console.log("oi");
+  }
+
   return (
     <>
       <PageContainer>
         <FormContainer>
           <Logo>Dulce</Logo>
-          <Form onSubmit={() => console.log("oi")}>
+          <Form onSubmit={formSubmit}>
             <input
               type="text"
               placeholder="Entre com seu e-mail"
@@ -99,4 +104,13 @@ const Checkbox = styled.div`
 
   color: #fff;
   font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
