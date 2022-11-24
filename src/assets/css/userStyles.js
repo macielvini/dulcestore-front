@@ -8,6 +8,15 @@ const UserStyles = createGlobalStyle`
   *{
     box-sizing: border-box;
   }
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: orange 5px auto;
+  }
 `;
 
 export default UserStyles;
