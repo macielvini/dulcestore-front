@@ -28,6 +28,10 @@ const StyledForm = styled.form`
     border: none;
   }
 
+  input::placeholder {
+    color: #878c8d;
+  }
+
   button {
     width: 100%;
     max-width: 200px;

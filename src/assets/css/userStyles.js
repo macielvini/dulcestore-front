@@ -15,7 +15,7 @@ const UserStyles = createGlobalStyle`
   }
 
   button:focus {
-    outline: orange 5px auto;
+    outline: bisque 3px auto;
   }
 
   input {
