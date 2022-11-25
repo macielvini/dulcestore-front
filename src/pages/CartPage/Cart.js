@@ -22,6 +22,12 @@ export default function Cart() {
         <Subtitulo>Informações do pedido</Subtitulo>
 
         <Infos/>  
+        <Div/>
+
+        <Total>
+          <p>Total</p>
+          <p>R$ 5.550,80</p>
+        </Total>
      </Background>
   );
 }
@@ -79,4 +85,26 @@ const Subtitulo = styled.p`
   display: block;
   width: 255px;
   margin-top: 25px;
+`
+const Div = styled.div`
+  height: 1px;
+  width: 250px;
+  background-color: #7979791C;
+  margin-top: 14px;
+`
+const Total = styled.div`
+  width: 255px;
+  margin-top: 22px;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+  }
 `
