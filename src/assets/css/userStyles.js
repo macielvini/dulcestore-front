@@ -9,6 +9,10 @@ const UserStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    padding-top: 50px;
+  }
+
   button {
     all: unset;
     cursor: pointer;
@@ -24,6 +28,10 @@ const UserStyles = createGlobalStyle`
 
   input:focus {
     outline: 3px solid #073C47;
+  }
+
+  input::placeholder{
+    color: #878C8D;
   }
 
   a {
