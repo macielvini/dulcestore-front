@@ -1,15 +1,11 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ProductCard from "../../components/ProductCard";
+import Navbar from "../../components/Navbar";
 
 export default function Home() {
   return (
     <>
       <PageContainer>
-        <p>Home</p>
-        <Link to={"/cart"}>Cart</Link>
-        <Link to={"/checkout"}>Checkout</Link>
-        <Link to={"/product/:1"}>Product</Link>
         <ProductsContainer>
           <ProductCard
             imageSource={
@@ -27,6 +23,7 @@ export default function Home() {
           />
         </ProductsContainer>
       </PageContainer>
+      <Navbar />
     </>
   );
 }
