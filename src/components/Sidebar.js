@@ -19,8 +19,10 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
               <p className="title">Bem-vindo</p>
               <p>Entre na sua conta para ver suas compras, favoritos, etc.</p>
               <div className="buttons">
-                <button>Entrar</button>
-                <button>Criar conta</button>
+                <button onClick={() => navigate("/sign-in")}>Entrar</button>
+                <button onClick={() => navigate("/sign-up")}>
+                  Criar conta
+                </button>
               </div>
             </WelcomeCard>
             {SidebarData.map((item) => (
@@ -42,37 +44,6 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
     </>
   );
 }
-
-// const StyledSidebar = styled.div`
-//   width: 80vw;
-//   height: 100vh;
-
-//   background: #fff;
-
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   z-index: 2;
-
-//   display: ${(props) => (props.showSidebar ? "initial" : "none")};
-
-//   transition: all 400ms ease;
-// `;
-
-// const SidebarBg = styled.div`
-//   width: 100vw;
-//   height: 100vh;
-
-//   background: red;
-//   opacity: 0.5;
-
-//   position: fixed;
-//   top: 0;
-//   right: 0;
-//   z-index: 1;
-
-//   display: ${(props) => (props.showSidebar ? "initial" : "none")};
-// `;
 
 const Nav = styled.nav`
   width: 100vw;

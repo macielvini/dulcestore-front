@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Form from "../../components/Form";
 import Logo from "../../components/Logo";
+import * as AiIcons from "react-icons/ai";
 
 export default function SignIn() {
   const [remember, setRemember] = useState(false);
@@ -43,18 +44,16 @@ export default function SignIn() {
             />
             <Checkbox onClick={() => setRemember(!remember)}>
               {remember ? (
-                <span className="material-symbols-rounded">check_box</span>
+                <AiIcons.AiFillCheckSquare className="icon" />
               ) : (
-                <span className="material-symbols-rounded">
-                  check_box_outline_blank
-                </span>
+                <AiIcons.AiOutlineBorder className="icon" />
               )}
               <span>Lembrar-me</span>
             </Checkbox>
             <button>Login</button>
           </Form>
 
-          <Link to={"/"}>
+          <Link to={"/sign-up"}>
             Não possui uma conta? <strong>Cadastre-se</strong>
           </Link>
         </FormContainer>
@@ -92,7 +91,7 @@ const FormContainer = styled.div`
 const Checkbox = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
   width: 100%;
 
@@ -101,6 +100,10 @@ const Checkbox = styled.div`
 
   &:hover {
     cursor: pointer;
+  }
+
+  .icon {
+    font-size: 24px;
   }
 
   -webkit-user-select: none;

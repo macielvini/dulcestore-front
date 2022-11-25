@@ -9,10 +9,6 @@ const UserStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
-    padding-top: 50px;
-  }
-
   button {
     all: unset;
     cursor: pointer; 

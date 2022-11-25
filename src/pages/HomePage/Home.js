@@ -29,7 +29,7 @@ export default function Home() {
 }
 
 const PageContainer = styled.div`
-  padding: 25px;
+  padding: 75px 25px 25px;
 `;
 
 const ProductsContainer = styled.div`
