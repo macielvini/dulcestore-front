@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styled from "styled-components"
 
-export default function Infos () {
+export default function Infos ({preco}) {
     const [cep, setCep] = useState("")
     const [validate, setValidate] = useState("")
 
@@ -21,7 +21,7 @@ export default function Infos () {
         <>
             <Subtotal>
                 <p>Subtotal</p>
-                <p>R$ 5.550,80</p>
+                <p>{preco}</p>
             </Subtotal>
 
             <Frete>

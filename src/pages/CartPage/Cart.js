@@ -21,7 +21,7 @@ export default function Cart() {
 
         <Subtitulo>Informações do pedido</Subtitulo>
 
-        <Infos/>  
+        <Infos preco={"R$ 5.550,80"}/>  
         <Div/>
 
         <Total>
