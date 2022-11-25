@@ -11,12 +11,21 @@ const UserStyles = createGlobalStyle`
 
   button {
     all: unset;
-    cursor: pointer;
+    cursor: pointer; 
   }
 
   button:focus {
-    outline: bisque 3px auto;
+    outline: none;
   }
+
+  button:active {
+    outline: none;
+    filter: brightness(0.9);
+  }
+
+  button:hover {
+      filter: brightness(1.3);
+    }
 
   input {
     font-family: 'Montserrat', sans-serif;
@@ -24,6 +33,10 @@ const UserStyles = createGlobalStyle`
 
   input:focus {
     outline: 3px solid #073C47;
+  }
+
+  input::placeholder{
+    color: #878C8D;
   }
 
   a {

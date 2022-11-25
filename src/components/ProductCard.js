@@ -1,45 +1,47 @@
 import styled from "styled-components";
-import cartIcon from "../assets/images/cart-icon.svg";
+import { BsCartPlus } from "react-icons/bs";
 
 export default function ProductCard({ imageSource, name, price }) {
   return (
-    <>
-      <Container>
-        <Card>
-          <CardImage>
-            <img src={imageSource} alt="" />
-          </CardImage>
-          <CardBottom>
+    <Container>
+      <Card>
+        <CardImage>
+          <img src={imageSource} alt="" />
+        </CardImage>
+
+        <CardBottom>
+          <div>
             <ProductName>{name}</ProductName>
             <ProductPrice>{price}</ProductPrice>
-            <ButtonContainer>
-              <BuyButton>Comprar</BuyButton>
-              <CartButton>
-                <img src={cartIcon} alt="cart icon" />
-              </CartButton>
-            </ButtonContainer>
-          </CardBottom>
-        </Card>
-      </Container>
-    </>
+          </div>
+          <ButtonContainer>
+            <BuyButton>Comprar</BuyButton>
+            <CartButton>
+              <BsCartPlus className="icon" />
+            </CartButton>
+          </ButtonContainer>
+        </CardBottom>
+      </Card>
+    </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-
   width: 100%;
-  min-height: 200px;
-  border-radius: 0px 0px 15px 15px;
+  height: 280px;
 `;
 
 const Card = styled.div`
   min-width: 100px;
   width: 100%;
-  max-width: 140px;
+  max-width: 180px;
+  height: 100%;
 
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  overflow: hidden;
 `;
 
 const CardImage = styled.div`
@@ -51,19 +53,19 @@ const CardImage = styled.div`
     object-fit: cover;
     object-position: 0 70%;
   }
-
-  overflow: hidden;
-  border-radius: 15px 15px 0px 0px;
 `;
 
 const CardBottom = styled.div`
   width: 100%;
-  min-height: 86px;
+  height: calc(100% - 160px);
 
   background: #3e6063;
 
-  border-radius: 0px 0px 15px 15px;
   padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const ProductName = styled.p`
@@ -74,6 +76,13 @@ const ProductName = styled.p`
   align-items: center;
 
   color: #fffdfb;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const ProductPrice = styled.p`
@@ -116,4 +125,6 @@ const CartButton = styled(BuyButton)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 16px;
 `;
