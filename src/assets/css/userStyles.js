@@ -19,11 +19,7 @@ const UserStyles = createGlobalStyle`
   }
 
   button:focus {
-<<<<<<< HEAD
     outline: none;
-=======
-    outline: solid 1px #B97C5F;
->>>>>>> 3ded97c039d401196f65b9d48d69197ea1ff1c06
   }
 
   button:active {
