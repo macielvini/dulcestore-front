@@ -15,11 +15,11 @@ const UserStyles = createGlobalStyle`
 
   button {
     all: unset;
-    cursor: pointer;
+    cursor: pointer; 
   }
 
   button:focus {
-    outline: bisque 3px auto;
+    outline: solid 1px #B97C5F;
   }
 
   input {

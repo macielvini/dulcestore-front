@@ -1,24 +1,36 @@
 import styled from "styled-components";
 import { BsList, BsSearch, BsCart2 } from "react-icons/bs";
+import Sidebar from "./Sidebar";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import NavItem from "./NavItem";
 
 export default function Navbar() {
+  const [sidebar, setSidebar] = useState(true);
+
+  const showSidebar = () => setSidebar(!sidebar);
+
   return (
-    <header>
-      <Nav>
-        <li>
-          <BsList className="icon" />
-        </li>
-        <SearchBar>
-          <BsSearch className="icon" />
-          <input type="text" placeholder="Pesquisar" />
-        </SearchBar>
-        <li>
-          <BsCart2 className="icon" />
-        </li>
-      </Nav>
-    </header>
+    <>
+      <header>
+        <Nav>
+          <li onClick={showSidebar}>
+            <Link to="#">
+              <BsList className="icon" />
+            </Link>
+          </li>
+          <SearchBar>
+            <BsSearch className="icon" />
+            <input type="text" placeholder="Pesquisar" />
+          </SearchBar>
+          <li>
+            <Link to="/cart">
+              <BsCart2 className="icon" />
+            </Link>
+          </li>
+        </Nav>
+      </header>
+      <Sidebar showSidebar={showSidebar} sidebar={sidebar} />
+    </>
   );
 }
 
