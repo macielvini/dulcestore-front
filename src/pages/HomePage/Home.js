@@ -18,7 +18,7 @@ export default function Home() {
             imageSource={
               "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
             }
-            name="Banquinho de madeira"
+            name="Banquinho de madeira com mais textos que necessarios"
             price="R$ 3.199,90"
           />
         </ProductsContainer>
@@ -33,8 +33,9 @@ const PageContainer = styled.div`
 `;
 
 const ProductsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* display: grid; */
+  /* grid-template-columns: repeat(2, 1fr); */
+  display: flex;
   column-gap: 15px;
   row-gap: 20px;
 
