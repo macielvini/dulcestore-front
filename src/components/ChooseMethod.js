@@ -11,8 +11,8 @@ export default function ChooseMethode ({select, setSelect}) {
                     <p>CARTÃO DE CRÉDITO</p>
                 </aside>
                 <div onClick={()=>setSelect("cartao")}>
-                    {select === "cartao" ? <Select/>
-                    : <></>}
+                    {select === "cartao" ? <Select/> 
+                    : <></>} 
                 </div>
             </Option>
 
@@ -22,8 +22,8 @@ export default function ChooseMethode ({select, setSelect}) {
                     <p>BOLETO</p>
                 </aside>
                 <div onClick={()=>setSelect("boleto")}>
-                    {select === "boleto" ? <Select/>
-                    : <></>}
+                    {select === "boleto" ? <Select/> 
+                    : <></>} 
                 </div>
             </Option>
 
@@ -33,8 +33,8 @@ export default function ChooseMethode ({select, setSelect}) {
                     <p>PIX</p>
                 </aside>
                 <div onClick={()=>setSelect("pix")}>
-                    {select === "pix" ? <Select/>
-                    : <></>}
+                    {select === "pix" ? <Select/> 
+                    : <></>} 
                 </div>
             </Option>
         </Container>
@@ -47,6 +47,7 @@ const Option = styled.div`
     width: 250px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .icon {
         width: 20px;
@@ -65,18 +66,22 @@ const Option = styled.div`
         display: flex;
         gap: 10px;
     }
-    div {
-        height: 20px;
-        width: 20px;
-        border-radius: 100%;
-        border: 1px solid #022329;
+     div {
+         height: 20px;
+         width: 20px;
+         border-radius: 100%; 
+         border: 1px solid #022329;
 
-        cursor: pointer;
-    }
+         display: flex;
+         justify-content: center;
+         align-items: center;
+        cursor: pointer;  
+    } 
 `
-const Select = styled.div`
-    height: 50%;
-    width: 50%;
+const Select = styled.span`
+    display: block;
+    height: 10px;
+    width: 10px;
     border-radius: 100%;
     background-color: #022329;
 `

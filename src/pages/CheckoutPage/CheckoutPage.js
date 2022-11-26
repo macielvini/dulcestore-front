@@ -2,17 +2,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import back from "../../assets/images/back.png"
+import CardForms from "../../components/CardForms";
 import ChooseMethode from "../../components/ChooseMethod";
 
 export default function Checkout() {
   const navigate = useNavigate ()
   const [select, setSelect] = useState("")
+
   return (
     <Background>
       <Img><img src={back} alt="back icon" onClick={() => navigate("/cart")}/></Img>
       <Titulo>Forma de pagamento</Titulo>
 
       <ChooseMethode select={select} setSelect={setSelect}/>
+
+      {select === "cartao" ? <CardForms/> : <></>}
+      
     </Background>
   );
 }
