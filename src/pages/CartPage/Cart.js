@@ -28,17 +28,21 @@ export default function Cart() {
           <p>Total</p>
           <p>R$ 5.550,80</p>
         </Total>
+
+        <Button onClick={()=> navigate("/checkout")}><p>IR PARA O PAGAMENTO</p></Button>
      </Background>
   );
 }
 
 const Background = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   background-color: #FAFCFC;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding-bottom: 40px;
 `
 
 const ContainerProducts = styled.div`
@@ -106,5 +110,29 @@ const Total = styled.div`
     letter-spacing: 0em;
     text-align: center;
     color: #000000;
+  }
+`
+const Button = styled.div`
+  height: 49px;
+  width: 300px;
+  border-radius: 8px;
+  background-color: #073C47;
+
+  margin-top: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFEFD6;
   }
 `
