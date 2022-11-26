@@ -33,8 +33,9 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
                 </button>
               </div>
             </WelcomeCard>
-            {SidebarData.map((item) => (
+            {SidebarData.map((item, index) => (
               <ListItem
+                key={index}
                 hideFromUnsigned={item.hideFromUnsigned}
                 onClick={() => navigate(item.path)}
               >
