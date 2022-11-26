@@ -15,7 +15,7 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
           <BsIcons.BsXCircle className="navbar-toggle" onClick={showSidebar} />
 
           <ul>
-            <WelcomeCard>
+            <WelcomeCard needSignin={false}>
               <p className="title">Bem-vindo</p>
               <p>Entre na sua conta para ver suas compras, favoritos, etc.</p>
               <div className="buttons">

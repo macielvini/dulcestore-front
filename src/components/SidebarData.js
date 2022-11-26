@@ -1,4 +1,3 @@
-import * as BsIcons from "react-icons/bs";
 import * as AiIcons from "react-icons/ai";
 
 export const SidebarData = [
