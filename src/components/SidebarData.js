@@ -1,4 +1,3 @@
-import * as BsIcons from "react-icons/bs";
 import * as AiIcons from "react-icons/ai";
 
 export const SidebarData = [
@@ -6,24 +5,24 @@ export const SidebarData = [
     icon: <AiIcons.AiOutlineHome />,
     name: "Home",
     path: "/",
-    needAccount: false,
+    hideFromUnsigned: false,
   },
   {
     icon: <AiIcons.AiOutlineHeart />,
     name: "Favoritos",
     path: "/",
-    needAccount: false,
+    hideFromUnsigned: false,
   },
   {
     icon: <AiIcons.AiOutlineInbox />,
     name: "Pedidos",
     path: "/",
-    needAccount: false,
+    hideFromUnsigned: false,
   },
   {
     icon: <AiIcons.AiOutlineUser />,
     name: "Minha conta",
     path: "/",
-    needAccount: false,
+    hideFromUnsigned: false,
   },
 ];

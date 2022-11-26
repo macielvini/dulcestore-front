@@ -6,7 +6,13 @@ import { SidebarData } from "./SidebarData";
 
 export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  const firstName = user.name.split(" ")[0];
+
+  function signOut() {
+    setUser({ name: "", token: "", email: "" });
+    localStorage.clear();
+  }
 
   return (
     <>
@@ -15,9 +21,11 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
           <BsIcons.BsXCircle className="navbar-toggle" onClick={showSidebar} />
 
           <ul>
-            <WelcomeCard>
-              <p className="title">Bem-vindo</p>
-              <p>Entre na sua conta para ver suas compras, favoritos, etc.</p>
+            <WelcomeCard hideFromUser={user.token}>
+              <p className="title">Bem-vindo{", " + firstName}</p>
+              <p className="subtitle">
+                Entre na sua conta para ver suas compras, favoritos, etc.
+              </p>
               <div className="buttons">
                 <button onClick={() => navigate("/sign-in")}>Entrar</button>
                 <button onClick={() => navigate("/sign-up")}>
@@ -27,7 +35,7 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
             </WelcomeCard>
             {SidebarData.map((item) => (
               <ListItem
-                needSignin={item.needAccount}
+                hideFromUnsigned={item.hideFromUnsigned}
                 onClick={() => navigate(item.path)}
               >
                 {item.icon}
@@ -35,7 +43,7 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
               </ListItem>
             ))}
           </ul>
-          <SignOut needSignin={false}>
+          <SignOut hideFromUser={!user.token} onClick={signOut}>
             <BsIcons.BsBoxArrowLeft />
             <button>Sair da conta</button>
           </SignOut>
@@ -101,7 +109,7 @@ const ListItem = styled.li`
   padding: 10px;
   border-radius: 10px;
 
-  display: ${(props) => (props.needSignin ? "none" : "flex")};
+  display: ${(props) => (props.hideFromUnsigned ? "none" : "flex")};
 
   &:hover {
     cursor: pointer;
@@ -133,7 +141,7 @@ const SignOut = styled.div`
   justify-content: center;
   gap: 10px;
 
-  display: ${(props) => (props.needSignin ? "none" : "flex")};
+  display: ${(props) => (props.hideFromUser ? "none" : "flex")};
 `;
 
 const WelcomeCard = styled.div`
@@ -157,6 +165,11 @@ const WelcomeCard = styled.div`
     justify-content: space-between;
   }
 
+  .buttons,
+  .subtitle {
+    display: ${(props) => (props.hideFromUser ? "none" : "flex")};
+  }
+
   button {
     border: none;
 
@@ -167,6 +180,4 @@ const WelcomeCard = styled.div`
   }
 
   margin-bottom: 20px;
-
-  display: ${(props) => (props.needSignin ? "none" : "flex")};
 `;

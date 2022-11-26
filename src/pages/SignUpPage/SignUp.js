@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import Form from "../../components/Form";
 import Logo from "../../components/Logo";
+import { signUp } from "../../services/api";
 
 export default function Sign() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -19,7 +22,47 @@ export default function Sign() {
 
   function formSubmit(e) {
     e.preventDefault();
-    console.log("oi");
+
+    const body = {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      password_confirm: form.passwordConfirm,
+    };
+
+    signUp(body)
+      .then(() => {
+        let timerInterval;
+        Swal.fire({
+          title: "Conta criada com sucesso!",
+          icon: "success",
+          html: "Voce será redirecionado automaticamente em <b></b> segundos.",
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const b = Swal.getHtmlContainer().querySelector("b");
+            timerInterval = setInterval(() => {
+              b.textContent = parseInt(Swal.getTimerLeft() / 1000);
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        });
+
+        navigate("/sign-in");
+      })
+      .catch((err) => {
+        const messages = err.response.data.message.map(
+          (message) => `\n${message}\n`
+        );
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: messages,
+        });
+      });
   }
 
   return (
@@ -34,6 +77,7 @@ export default function Sign() {
               name="name"
               value={form.name}
               onChange={(e) => formHandler(e)}
+              required
             />
             <input
               type="text"
@@ -41,6 +85,7 @@ export default function Sign() {
               name="email"
               value={form.email}
               onChange={(e) => formHandler(e)}
+              required
             />
             <input
               type="password"
@@ -48,6 +93,7 @@ export default function Sign() {
               name="password"
               value={form.password}
               onChange={(e) => formHandler(e)}
+              required
             />
             <input
               type="password"
@@ -55,6 +101,7 @@ export default function Sign() {
               name="passwordConfirm"
               value={form.passwordConfirm}
               onChange={(e) => formHandler(e)}
+              required
             />
             <button type="submit">Cadastrar</button>
           </Form>
