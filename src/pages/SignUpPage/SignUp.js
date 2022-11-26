@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import Form from "../../components/Form";
 import Logo from "../../components/Logo";
-import { SignUp } from "../../services/api";
+import { signUp } from "../../services/api";
 
 export default function Sign() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function Sign() {
       password_confirm: form.passwordConfirm,
     };
 
-    SignUp(body)
+    signUp(body)
       .then(() => {
         let timerInterval;
         Swal.fire({

@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Form from "../../components/Form";
 import Logo from "../../components/Logo";
 import * as AiIcons from "react-icons/ai";
+import { api, signIn } from "../../services/api";
+import { useAuth } from "../../context/authContext";
+import Swal from "sweetalert2";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
   const [remember, setRemember] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -19,7 +24,32 @@ export default function SignIn() {
 
   function formSubmit(e) {
     e.preventDefault();
-    console.log("oi");
+
+    signIn(form)
+      .then(({ data }) => {
+        api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
+        setUser({ token: data.token, name: data.name, email: data.email });
+        if (remember) {
+          localStorage.setItem("user", JSON.stringify(data));
+        }
+
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.response.status);
+        let message;
+        if (err.response.status === 401) {
+          message = "E-mail e/ou senha incorreto(s)";
+        } else {
+          message = "Algo deu errado, tente novamente!";
+        }
+
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: message,
+        });
+      });
   }
 
   return (
@@ -34,6 +64,7 @@ export default function SignIn() {
               name="email"
               value={form.email}
               onChange={(e) => formHandler(e)}
+              required
             />
             <input
               type="password"
@@ -41,6 +72,7 @@ export default function SignIn() {
               name="password"
               value={form.password}
               onChange={(e) => formHandler(e)}
+              required
             />
             <Checkbox onClick={() => setRemember(!remember)}>
               {remember ? (
