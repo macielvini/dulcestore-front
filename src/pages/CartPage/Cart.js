@@ -3,7 +3,7 @@ import CartProduct from "../../components/CartProduct";
 
 import back from "../../assets/images/back.png"
 import { useNavigate } from "react-router-dom";
-import Infos from "./infos";
+import Infos from "../../components/InfosCart";
 
 export default function Cart() {
   const navigate = useNavigate()
