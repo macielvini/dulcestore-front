@@ -11,6 +11,7 @@ export function AuthProvider(props) {
     name: "",
     email: "",
   });
+  const [cep, setCep] = useState("")
 
   useEffect(() => {
     const userStorage = localStorage.getItem("user");
@@ -19,7 +20,7 @@ export function AuthProvider(props) {
 
   return (
     <>
-      <AuthContext.Provider value={{ user, setUser }}>
+      <AuthContext.Provider value={{ user, setUser, cep, setCep }}>
         {props.children}
       </AuthContext.Provider>
     </>

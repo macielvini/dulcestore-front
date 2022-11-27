@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 
-export default function CardForms () {
+export default function CardForms ({setValidate}) {
     const [data, setData] = useState({
         num: "",
         validade: "",
         cvv: "", 
         nome: ""
     })
+
+    useEffect(() => {
+      if (!data.num || !data.validade || !data.cvv || !data.nome) {
+        setValidate("Todas as informções são necessárias!")
+        return
+      }
+      setValidate("")
+    }, [data, setValidate])
 
     return (
         <Form>

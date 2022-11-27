@@ -1,11 +1,28 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
 
-export default function Otherforms () {
+export default function Otherforms ({setValidate}) {
+    const [data, setData] = useState({
+      nome:"",
+      cpf:"",
+      inst: ""
+    })
+    useEffect(() => {
+      if (!data.nome || !data.cpf || !data.inst) {
+        setValidate("Todas as informções são necessárias!")
+      }
+    }, [data, setValidate])
+
     return (
         <StyledForm>
-            <input placeholder="Nome do comprador"/>
-            <input placeholder="CPF"/>
-            <input placeholder="Intituição de pagamento"/>
+            <input placeholder="Nome do comprador"
+            onChange={(e)=> {setData({...data, nome: e.target.value})}}/>
+
+            <input placeholder="CPF"
+            onChange={(e)=> {setData({...data, cpf: e.target.value})}}/>
+
+            <input placeholder="Intituição de pagamento"
+            onChange={(e)=> {setData({...data, inst: e.target.value})}}/>
         </StyledForm>
     )
 }

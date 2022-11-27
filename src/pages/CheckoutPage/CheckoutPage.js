@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import back from "../../assets/images/back.png"
 import CardForms from "../../components/CardForms";
+import CepCheckout from "../../components/CepCheckout";
 import ChooseMethode from "../../components/ChooseMethod";
 import Otherforms from "../../components/OtherForms";
 
 export default function Checkout() {
   const navigate = useNavigate ()
   const [select, setSelect] = useState("")
+  const [validate, setValidate] = useState("")
 
   return (
     <Background>
@@ -17,10 +19,13 @@ export default function Checkout() {
 
       <ChooseMethode select={select} setSelect={setSelect}/>
 
-      {select === "cartao" ? <CardForms/> : 
-      select === "pix" || select === "boleto" ? <Otherforms/> :
+      {select === "cartao" ? <CardForms validate={validate} setValidate={setValidate}/> : 
+      select === "pix" || select === "boleto" ? <Otherforms validate={validate} setValidate={setValidate}/> :
       <Texto>Escolha a forma de pagamento</Texto> }
       
+      <CepCheckout validate={validate} setValidate={setValidate}/>
+
+      <Validate>{validate}</Validate>
     </Background>
   );
 }
@@ -63,5 +68,28 @@ const Titulo = styled.p`
   margin-bottom: 15px;
 `
 const Texto = styled.p`
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #878c8d;
 
+  display: block;
+  width: 255px;
+  height: 175px;
+  margin-top: 60px;
+`
+const Validate = styled.p`
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #3A8891;
+
+  display: block;
+  width: 255px;
 `
