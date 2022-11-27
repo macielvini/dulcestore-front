@@ -1,37 +1,33 @@
 import styled from "styled-components";
 import { BsCartPlus } from "react-icons/bs";
 
-export default function ProductCard({ imageSource, name, price }) {
+export default function ProductCard({
+  imageSource,
+  name,
+  price,
+  displayAlert,
+}) {
   return (
-    <Container>
-      <Card>
-        <CardImage>
-          <img src={imageSource} alt="" />
-        </CardImage>
+    <Card>
+      <CardImage>
+        <img src={imageSource} alt="" />
+      </CardImage>
 
-        <CardBottom>
-          <div>
-            <ProductName>{name}</ProductName>
-            <ProductPrice>{price}</ProductPrice>
-          </div>
-          <ButtonContainer>
-            <BuyButton>Comprar</BuyButton>
-            <CartButton>
-              <BsCartPlus className="icon" />
-            </CartButton>
-          </ButtonContainer>
-        </CardBottom>
-      </Card>
-    </Container>
+      <CardBottom>
+        <div>
+          <ProductName>{name}</ProductName>
+          <ProductPrice>{price}</ProductPrice>
+        </div>
+        <ButtonContainer>
+          <BuyButton>Comprar</BuyButton>
+          <CartButton onClick={displayAlert} className="icon">
+            <BsCartPlus />
+          </CartButton>
+        </ButtonContainer>
+      </CardBottom>
+    </Card>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 280px;
-`;
 
 const Card = styled.div`
   min-width: 100px;

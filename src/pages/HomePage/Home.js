@@ -7,6 +7,12 @@ import { numberToFormatBrl } from "../../utils/vanillaFunctions";
 
 export default function Home() {
   const [productList, setProductList] = useState([]);
+  const [showCartMessage, setShowCartMessage] = useState(false);
+
+  function displayAlert() {
+    setShowCartMessage(true);
+    setTimeout(() => setShowCartMessage(false), 2000);
+  }
 
   function getProducts() {
     getProductList()
@@ -23,6 +29,7 @@ export default function Home() {
 
   return (
     <>
+      <Navbar showCartMessage={showCartMessage} />
       <PageContainer>
         <ProductsContainer>
           {productList.length > 0
@@ -33,6 +40,7 @@ export default function Home() {
                   imageSource={product.image}
                   name={product.name}
                   price={numberToFormatBrl(product.value)}
+                  displayAlert={displayAlert}
                 />
               ))
             : "Carregando produtos"}
@@ -46,7 +54,6 @@ export default function Home() {
           />
         </ProductsContainer>
       </PageContainer>
-      <Navbar />
     </>
   );
 }
