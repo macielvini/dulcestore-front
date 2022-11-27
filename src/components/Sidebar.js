@@ -22,7 +22,7 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
 
           <ul>
             <WelcomeCard hideFromUser={user.token}>
-              <p className="title">Bem-vindo{", " + firstName}</p>
+              <p className="title">Bem-vindo{user.token && ", " + firstName}</p>
               <p className="subtitle">
                 Entre na sua conta para ver suas compras, favoritos, etc.
               </p>
@@ -33,8 +33,9 @@ export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
                 </button>
               </div>
             </WelcomeCard>
-            {SidebarData.map((item) => (
+            {SidebarData.map((item, index) => (
               <ListItem
+                key={index}
                 hideFromUnsigned={item.hideFromUnsigned}
                 onClick={() => navigate(item.path)}
               >
