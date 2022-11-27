@@ -12,6 +12,11 @@ export default function Checkout() {
   const [select, setSelect] = useState("")
   const [validate, setValidate] = useState("")
 
+  function finalizar () {
+    if (!validate) {
+      navigate("/")
+    }
+  }
   return (
     <Background>
       <Img><img src={back} alt="back icon" onClick={() => navigate("/cart")}/></Img>
@@ -26,6 +31,8 @@ export default function Checkout() {
       <CepCheckout validate={validate} setValidate={setValidate}/>
 
       <Validate>{validate}</Validate>
+
+      <Button><p>FINALIZAR O PAGAMENTO</p></Button>
     </Background>
   );
 }
@@ -92,4 +99,29 @@ const Validate = styled.p`
 
   display: block;
   width: 255px;
+`
+
+const Button = styled.div`
+  height: 49px;
+  width: 300px;
+  border-radius: 8px;
+  background-color: #073C47;
+
+  margin-top: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFEFD6;
+  }
 `
