@@ -5,7 +5,7 @@ import axios from "axios";
 
 //DEV
 const URL = "http://localhost:5002";
-// const URL =  "https://dulcestore.onrender.com";
+// const URL = "https://dulcestore.onrender.com";
 
 export const api = axios.create({ baseURL: URL });
 const TOKEN = localStorage.getItem("token");

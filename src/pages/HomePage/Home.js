@@ -17,7 +17,6 @@ export default function Home() {
   function getProducts() {
     getProductList()
       .then((res) => {
-        console.log(res.data);
         setProductList(res.data);
       })
       .catch((err) => console.log(err));
@@ -32,26 +31,20 @@ export default function Home() {
       <Navbar showCartMessage={showCartMessage} />
       <PageContainer>
         <ProductsContainer>
-          {productList.length > 0
-            ? productList.map((product) => (
-                <ProductCard
-                  key={product._id}
-                  id={product._id}
-                  imageSource={product.image}
-                  name={product.name}
-                  price={numberToFormatBrl(product.value)}
-                  displayAlert={displayAlert}
-                />
-              ))
-            : "Carregando produtos"}
-
-          <ProductCard
-            imageSource={
-              "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-            }
-            name="Banquinho"
-            price="R$ 3.199,90"
-          />
+          {productList.length > 0 ? (
+            productList.map((product) => (
+              <ProductCard
+                key={product._id}
+                id={product._id}
+                imageSource={product.image}
+                name={product.name}
+                price={numberToFormatBrl(product.value)}
+                displayAlert={displayAlert}
+              />
+            ))
+          ) : (
+            <div>Carregando produtos</div>
+          )}
         </ProductsContainer>
       </PageContainer>
     </>
