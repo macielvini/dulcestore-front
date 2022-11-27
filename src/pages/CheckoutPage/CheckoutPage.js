@@ -4,6 +4,7 @@ import styled from "styled-components";
 import back from "../../assets/images/back.png"
 import CardForms from "../../components/CardForms";
 import ChooseMethode from "../../components/ChooseMethod";
+import Otherforms from "../../components/OtherForms";
 
 export default function Checkout() {
   const navigate = useNavigate ()
@@ -16,7 +17,9 @@ export default function Checkout() {
 
       <ChooseMethode select={select} setSelect={setSelect}/>
 
-      {select === "cartao" ? <CardForms/> : <></>}
+      {select === "cartao" ? <CardForms/> : 
+      select === "pix" || select === "boleto" ? <Otherforms/> :
+      <Texto>Escolha a forma de pagamento</Texto> }
       
     </Background>
   );
@@ -58,4 +61,7 @@ const Titulo = styled.p`
   width: 255px;
   margin-top: 15px;
   margin-bottom: 15px;
+`
+const Texto = styled.p`
+
 `

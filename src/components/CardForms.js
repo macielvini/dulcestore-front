@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 
@@ -59,7 +59,8 @@ const Form = styled.div`
     width: 120px;
   }
   .div {
-    width: 255numlex;
+    width: 255px;
+    display: flex;
     justify-content: space-between;
   }
   button {
