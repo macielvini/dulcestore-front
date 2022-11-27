@@ -32,7 +32,7 @@ export default function Checkout() {
 
       <Validate>{validate}</Validate>
 
-      <Button><p>FINALIZAR O PAGAMENTO</p></Button>
+      <Button onClick={finalizar}><p>FINALIZAR O PAGAMENTO</p></Button>
     </Background>
   );
 }
