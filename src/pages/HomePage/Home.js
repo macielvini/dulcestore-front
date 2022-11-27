@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import { getProductList } from "../../services/api";
 import { useEffect, useState } from "react";
 import { numberToFormatBrl } from "../../utils/vanillaFunctions";
+import { TailSpin } from "react-loader-spinner";
 
 export default function Home() {
   const [productList, setProductList] = useState([]);
@@ -30,7 +31,7 @@ export default function Home() {
     <>
       <Navbar showCartMessage={showCartMessage} />
       <PageContainer>
-        <ProductsContainer>
+        <ProductsContainer $loading={productList.length < 1}>
           {productList.length > 0 ? (
             productList.map((product) => (
               <ProductCard
@@ -43,7 +44,18 @@ export default function Home() {
               />
             ))
           ) : (
-            <div>Carregando produtos</div>
+            <>
+              <TailSpin
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            </>
           )}
         </ProductsContainer>
       </PageContainer>
@@ -55,14 +67,21 @@ const PageContainer = styled.div`
   padding: 75px 25px 25px;
   display: flex;
   width: 100%;
+
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
 `;
 
 const ProductsContainer = styled.div`
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   column-gap: 15px;
   row-gap: 20px;
+
+  display: ${(props) => (props.$loading ? "flex" : "grid")};
+  grid-template-columns: ${(props) =>
+    props.$loading ? "1fr" : "repeat(2, 1fr)"};
 
   justify-content: center;
 
