@@ -1,8 +1,9 @@
 import { useState } from "react"
 import styled from "styled-components"
+import { useAuth } from "../context/authContext"
 
 export default function Infos ({preco}) {
-    const [cep, setCep] = useState("")
+    const {cep, setCep} = useAuth()
     const [validate, setValidate] = useState("")
 
     function  validar () {
