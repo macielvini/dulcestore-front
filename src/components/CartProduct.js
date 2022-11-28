@@ -5,10 +5,8 @@ import { HiOutlineTrash } from "react-icons/hi";
 import Swal from "sweetalert2";
 import { getCart } from "../services/api";
 
-export default function CartProduct({props}) {
-  const [num, setNum] = useState(1);
-
-
+export default function CartProduct({ props }) {
+  const [num, setNum] = useState(props.quantity);
 
   function deleteItem() {
     Swal.fire({
@@ -32,10 +30,7 @@ export default function CartProduct({props}) {
     <Container>
       <div>
         <ImgContainer>
-          <img
-            src={props.image}
-            alt={props.description}
-          />
+          <img src={props.image} alt={props.description} />
         </ImgContainer>
 
         <aside>

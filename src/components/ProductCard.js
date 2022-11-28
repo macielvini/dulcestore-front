@@ -46,7 +46,7 @@ export default function ProductCard(props) {
         displayAlert();
       })
       .catch((err) => {
-        if (err.response.status === 404) {
+        if (err.response.status === 404 || err.response.status === 422) {
           Swal.fire({
             title: "Faça login para adicionar ao carrinho",
             icon: "warning",
