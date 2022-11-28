@@ -1,22 +1,29 @@
 import styled from "styled-components";
 import { BsCartPlus } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { numberToFormatBrl } from "../utils/vanillaFunctions";
 
-export default function ProductCard({
-  imageSource,
-  name,
-  price,
-  displayAlert,
-}) {
+export default function ProductCard(props) {
+  const navigate = useNavigate();
+
+  const { displayAlert } = props;
+  const { _id, description, name, value, image } = props.product;
+
+  const goToProductPage = () =>
+    navigate(`/product/${_id}`, {
+      state: { image, name, value, description },
+    });
+
   return (
     <Card>
-      <CardImage>
-        <img src={imageSource} alt="" />
+      <CardImage onClick={goToProductPage}>
+        <img src={image} alt="" />
       </CardImage>
 
       <CardBottom>
-        <div>
+        <div className="info">
           <ProductName>{name}</ProductName>
-          <ProductPrice>{price}</ProductPrice>
+          <ProductPrice>{numberToFormatBrl(value)}</ProductPrice>
         </div>
         <ButtonContainer>
           <BuyButton>Comprar</BuyButton>
@@ -49,6 +56,10 @@ const CardImage = styled.div`
     object-fit: cover;
     object-position: 0 70%;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CardBottom = styled.div`
@@ -62,6 +73,12 @@ const CardBottom = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  .info {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 const ProductName = styled.p`

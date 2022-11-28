@@ -1,130 +1,196 @@
-import { useState } from "react"
-import styled from "styled-components"
-import plus from "../assets/images/plus.png"
-import minus from "../assets/images/minus.png"
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import * as AiIcons from "react-icons/ai";
+import { HiOutlineTrash } from "react-icons/hi";
+import Swal from "sweetalert2";
 
-export default function CartProduct () {
-    const [num, setNum] = useState(1)
-    if (num<1) setNum(1)
+export default function CartProduct() {
+  const [num, setNum] = useState(1);
 
-    return (
-        <Container>
-            <Img 
-                src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                alt="product image"
-            />
+  function deleteItem() {
+    Swal.fire({
+      html: "<p style='font-size:16px'>Remover ITEM TEXTO GRANDE do carrinho?</p>",
+      width: "fit-content",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "green",
+      confirmButtonText: "Sim, remover",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  }
 
-            <aside>
-                <Nome>Cadeira Future</Nome>
-                <Cor>Cor orvalho</Cor>
-                <Preco>R$ 1.300,00</Preco>
-            </aside>
+  useEffect(() => {
+    if (num === "") return setNum("");
+    if (num < 1 || isNaN(num)) return setNum(1);
+    if (num > 99) return setNum(99);
+  }, [num]);
 
-            <QntButton>
-                <Button onClick={() => setNum(num+1)}>
-                    <img src={plus} alt="plus button"/>
-                </Button>
+  return (
+    <Container>
+      <div>
+        <ImgContainer>
+          <img
+            src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+            alt="product"
+          />
+        </ImgContainer>
 
-                <Num>{num}</Num>
+        <aside>
+          <Nome>Cadeira Future</Nome>
+          <Preco>R$ 1.300,00</Preco>
+        </aside>
+      </div>
 
-                <Button onClick={() => setNum(num-1)}>
-                    <img src={minus} alt="minus button"/>
-                </Button>
-            </QntButton>
+      <Actions>
+        <QntButton>
+          <AiIcons.AiFillMinusCircle onClick={() => setNum(num - 1)} />
 
-        </Container>
-   )
+          <Num
+            value={num}
+            min="1"
+            max="99"
+            maxLength={2}
+            type="number"
+            onClick={(e) => e.target.select()}
+            onChange={(e) => setNum(parseInt(e.target.value))}
+          />
+
+          <AiIcons.AiFillPlusCircle onClick={() => setNum(num + 1)} />
+        </QntButton>
+      </Actions>
+      <HiOutlineTrash className="trash" onClick={deleteItem} />
+    </Container>
+  );
 }
 
 const Container = styled.div`
-    height: 83.19999694824219px;
-    width: 260px;
-    border-radius: 10px;
-    background-color: #3E6063;
+  @media (max-width: 300px) {
+    padding-bottom: calc(10px + 10px + 5px);
+  }
 
+  & > div {
     display: flex;
-    align-items: center;
+    gap: 10px;
+  }
 
-    aside {
-        height: 65px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+  width: 100%;
+  border-radius: 10px;
+  background-color: #3e6063;
 
-    position: relative;
-`
-const Img = styled.img`
+  padding: 10px;
+
+  aside {
     height: 65px;
-    width: 65px;
-    border-radius: 5px;
-
-    margin: 10px;
-`
-const Nome = styled.p`
-    font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #FFFFFF;
-
-    display: block;
-`
-const Cor = styled.p`
-    font-family: Montserrat;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 12px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #878C8D;
-
-    display: block;
-`
-const Preco = styled.p`
-    font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #FFEFD6;
-`
-const QntButton = styled.div`
-    height: 24px;
-    width: 66px;
-    border-radius: 14px;
-    padding: 2px;
-    background-color: #022329;
-
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
+  }
+
+  position: relative;
+  z-index: 0;
+
+  .trash {
+    font-size: 20px;
+    color: #fff;
 
     position: absolute;
-    top: 50px;
-    left: 185px;
-`
-const Button = styled.div`
-    height: 18px;
-    width: 18px;
-    border-radius: 100%;
-    background-color: #FFFFFF;
+    top: -5px;
+    right: -5px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 15px;
+    background: red;
+    padding: 3px;
+  }
 
+  svg:hover {
+    filter: brightness(0.8);
     cursor: pointer;
-`
-const Num = styled.p`
-    font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #FFFAFA;
-`
+  }
+`;
+
+const ImgContainer = styled.div`
+  height: 65px;
+  width: 65px;
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 70%;
+  }
+`;
+
+const Nome = styled.p`
+  color: #ffffff;
+`;
+
+const Preco = styled.p`
+  font-weight: 600;
+  color: #ffefd6;
+`;
+
+const QntButton = styled.div`
+  height: 24px;
+  width: 66px;
+  border-radius: 15px;
+  padding: 2px;
+  background-color: #022329;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 50px;
+`;
+
+const Num = styled.input`
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+
+  width: 25px;
+  background: none;
+  border: none;
+  outline: none;
+
+  &:focus {
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  color: #fff;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+`;
+
+const Actions = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  color: #fff;
+
+  font-size: 20px;
+
+  @media (max-width: 300px) {
+    left: 10px;
+    bottom: 0;
+  }
+`;

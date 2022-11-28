@@ -7,7 +7,7 @@ import { SidebarData } from "./SidebarData";
 export default function Sidebar({ showSidebar, sidebar, sidebarRef }) {
   const navigate = useNavigate();
   const { user, setUser } = useAuth();
-  const firstName = user.name.split(" ")[0];
+  const firstName = user.name?.split(" ")[0];
 
   function signOut() {
     setUser({ name: "", token: "", email: "" });
