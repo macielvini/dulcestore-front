@@ -16,10 +16,6 @@ export default function CartProduct() {
       cancelButtonColor: "green",
       confirmButtonText: "Sim, remover",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
     });
   }
 
