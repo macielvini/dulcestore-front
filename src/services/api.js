@@ -23,3 +23,7 @@ export function signIn(body) {
 export function getProductList() {
   return api.get("/product-list");
 }
+
+export function getCart () {
+  return api.get("/get-cart")
+}

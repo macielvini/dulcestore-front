@@ -4,10 +4,14 @@ import CartProduct from "../../components/CartProduct";
 import { useNavigate } from "react-router-dom";
 import Infos from "../../components/InfosCart";
 import * as AiIcons from "react-icons/ai";
+import { getCart } from "../../services/api";
 
 export default function Cart() {
   const navigate = useNavigate();
 
+  getCart()
+    .then((response) => console.log(response.data))
+    .catch(erro => console.log(erro.response.data))
   return (
     <Background>
       <BackButton>
