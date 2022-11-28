@@ -6,22 +6,25 @@ import Infos from "../../components/InfosCart";
 import * as AiIcons from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { getCart } from "../../services/api";
+import { useAuth } from "../../context/authContext";
 
 export default function Cart() {
   const navigate = useNavigate();
 
-  const [carts, setCarts] = useState([])
+  const [carts, setCarts] = useState([]);
+  const { user } = useAuth();
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (!user.token) navigate("/");
+
     getCart()
-    .then((res)=>{
-      setCarts(res.data.products)
-    })
-    .catch((err)=>{
-      console.log(err.message)
-    })
-  },[])
-
+      .then((res) => {
+        setCarts(res.data.products);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   return (
     <Background>
@@ -31,13 +34,9 @@ export default function Cart() {
       <Titulo>Meu carrinho</Titulo>
 
       <ContainerProducts>
-        {carts.map((cart)=>{
-          return(
-            <>
-              <CartProduct props={cart}/>
-            </>
-          )
-        })}
+        {carts.map((cart) => (
+          <CartProduct props={cart} key={cart._id} />
+        ))}
       </ContainerProducts>
 
       <OrderInfo>

@@ -3,12 +3,12 @@ import { BsCartPlus } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { numberToFormatBrl } from "../utils/vanillaFunctions";
 import { addCart } from "../services/api";
+import Swal from "sweetalert2";
+import { useAuth } from "../context/authContext";
 
 export default function ProductCard(props) {
   const navigate = useNavigate();
-
-  
-
+  const { user } = useAuth();
 
   const { displayAlert } = props;
   const { _id, description, name, value, image } = props.product;
@@ -17,25 +17,51 @@ export default function ProductCard(props) {
     navigate(`/product/${_id}`, {
       state: { image, name, value, description },
     });
-    
-    
-    function cartAdd(){
-      const body = {
-        _id: _id,
-        quantity: 1,
-      }
-      addCart(body)
-        .then((res)=>{
-          displayAlert()
-        })
-        .catch((err)=>{
-          if(err.message === "Request failed with status code 404"){
-            navigate("/sign-in")
-          }
-          console.log(err.message)
-        })
+
+  function cartAdd() {
+    if (!user.token) {
+      Swal.fire({
+        title: "Faça login para adicionar ao carrinho",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "green",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Fazer login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/sign-in");
+        }
+      });
+
+      return;
     }
 
+    const body = {
+      _id: `${_id}`,
+      quantity: 1,
+    };
+
+    addCart(body)
+      .then(() => {
+        displayAlert();
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          Swal.fire({
+            title: "Faça login para adicionar ao carrinho",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "green",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Fazer login",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/sign-in");
+            }
+          });
+        }
+      });
+  }
 
   return (
     <Card>
@@ -49,11 +75,15 @@ export default function ProductCard(props) {
           <ProductPrice>{numberToFormatBrl(value)}</ProductPrice>
         </div>
         <ButtonContainer>
-          <BuyButton onClick={()=>{
-            cartAdd()
-            navigate("/cart")
-          }}>Comprar</BuyButton>
-          <CartButton onClick={()=>cartAdd()} className="icon">
+          <BuyButton
+            onClick={() => {
+              cartAdd();
+              navigate("/cart");
+            }}
+          >
+            Comprar
+          </BuyButton>
+          <CartButton onClick={() => cartAdd()} className="icon">
             <BsCartPlus />
           </CartButton>
         </ButtonContainer>
