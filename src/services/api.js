@@ -4,7 +4,7 @@ import axios from "axios";
 // const URL = process.env.API_URL || "http://localhost:5002";
 
 //DEV
-// const URL = "http://localhost:5002";
+// const URL = "http://localhost:5002";https://dulcestore.onrender.com
 const URL = "https://dulcestore.onrender.com";
 
 export const api = axios.create({ baseURL: URL });
@@ -22,4 +22,12 @@ export function signIn(body) {
 
 export function getProductList() {
   return api.get("/product-list");
+}
+
+export function getCart(){
+  return api.get("/get-cart")
+}
+
+export function addCart(body){
+  return api.post("/cart-add", body)
 }

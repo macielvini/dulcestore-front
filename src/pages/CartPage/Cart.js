@@ -4,9 +4,24 @@ import CartProduct from "../../components/CartProduct";
 import { useNavigate } from "react-router-dom";
 import Infos from "../../components/InfosCart";
 import * as AiIcons from "react-icons/ai";
+import { useEffect, useState } from "react";
+import { getCart } from "../../services/api";
 
 export default function Cart() {
   const navigate = useNavigate();
+
+  const [carts, setCarts] = useState([])
+
+  useEffect(()=>{
+    getCart()
+    .then((res)=>{
+      setCarts(res.data.products)
+    })
+    .catch((err)=>{
+      console.log(err.message)
+    })
+  },[])
+
 
   return (
     <Background>
@@ -16,9 +31,13 @@ export default function Cart() {
       <Titulo>Meu carrinho</Titulo>
 
       <ContainerProducts>
-        <CartProduct />
-        <CartProduct />
-        <CartProduct />
+        {carts.map((cart)=>{
+          return(
+            <>
+              <CartProduct props={cart}/>
+            </>
+          )
+        })}
       </ContainerProducts>
 
       <OrderInfo>

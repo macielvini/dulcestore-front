@@ -18,6 +18,7 @@ export default function Home() {
     getProductList()
       .then((res) => {
         setProductList(res.data);
+        console.log(res.data)
       })
       .catch((err) => console.log(err));
   }
