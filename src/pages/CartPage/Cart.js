@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CartProduct from "../../components/CartProduct";
 
 import { useNavigate } from "react-router-dom";
-import Infos from "./infos";
+import Infos from "../../components/InfosCart";
 import * as AiIcons from "react-icons/ai";
 
 export default function Cart() {
@@ -29,6 +29,10 @@ export default function Cart() {
           <p>R$ 5.550,80</p>
         </Total>
       </OrderInfo>
+
+      <Button onClick={() => navigate("/checkout")}>
+        <p>IR PARA O PAGAMENTO</p>
+      </Button>
     </Background>
   );
 }
@@ -111,4 +115,29 @@ const Total = styled.div`
   justify-content: space-between;
 
   font-weight: 600;
+`;
+
+const Button = styled.div`
+  height: 49px;
+  width: 300px;
+  border-radius: 8px;
+  background-color: #073c47;
+
+  margin-top: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #ffefd6;
+  }
 `;
