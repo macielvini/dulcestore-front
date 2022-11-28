@@ -3,7 +3,6 @@ import styled from "styled-components";
 import * as AiIcons from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
 import Swal from "sweetalert2";
-import { getCart } from "../services/api";
 
 export default function CartProduct({ props }) {
   const [num, setNum] = useState(props.quantity);

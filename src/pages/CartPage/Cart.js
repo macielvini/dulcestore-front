@@ -24,6 +24,7 @@ export default function Cart() {
       .catch((err) => {
         console.log(err.message);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

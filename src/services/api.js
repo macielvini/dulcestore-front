@@ -5,7 +5,7 @@ import axios from "axios";
 const URL = "https://dulcestore.onrender.com";
 
 export const api = axios.create({ baseURL: URL });
-const TOKEN = localStorage.getItem("token");
+const TOKEN = JSON.parse(localStorage.getItem("user"))?.token;
 
 api.defaults.headers["Authorization"] = `Bearer ${TOKEN}`;
 
