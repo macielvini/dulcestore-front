@@ -3,12 +3,9 @@ import styled from "styled-components";
 import * as AiIcons from "react-icons/ai";
 import { HiOutlineTrash } from "react-icons/hi";
 import Swal from "sweetalert2";
-import { getCart } from "../services/api";
 
-export default function CartProduct({props}) {
-  const [num, setNum] = useState(1);
-
-
+export default function CartProduct({ props }) {
+  const [num, setNum] = useState(props.quantity);
 
   function deleteItem() {
     Swal.fire({
@@ -19,10 +16,6 @@ export default function CartProduct({props}) {
       cancelButtonColor: "green",
       confirmButtonText: "Sim, remover",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
     });
   }
 
@@ -36,10 +29,7 @@ export default function CartProduct({props}) {
     <Container>
       <div>
         <ImgContainer>
-          <img
-            src={props.image}
-            alt={props.description}
-          />
+          <img src={props.image} alt={props.description} />
         </ImgContainer>
 
         <aside>

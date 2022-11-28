@@ -28,17 +28,14 @@ export default function SignIn() {
     signIn(form)
       .then(({ data }) => {
         api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
+        localStorage.setItem("user", JSON.stringify(data));
         setUser({ token: data.token, name: data.name, email: data.email });
-        if (remember) {
-          localStorage.setItem("user", JSON.stringify(data));
-        }
 
         navigate("/");
       })
       .catch((err) => {
-        console.log(err.response.status);
         let message;
-        if (err.response.status === 401) {
+        if (err.response?.status === 401) {
           message = "E-mail e/ou senha incorreto(s)";
         } else {
           message = "Algo deu errado, tente novamente!";
