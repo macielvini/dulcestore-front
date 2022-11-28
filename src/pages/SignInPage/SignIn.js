@@ -28,9 +28,8 @@ export default function SignIn() {
     signIn(form)
       .then(({ data }) => {
         api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
-        setUser({ token: data.token, name: data.name, email: data.email });
-
         localStorage.setItem("user", JSON.stringify(data));
+        setUser({ token: data.token, name: data.name, email: data.email });
 
         navigate("/");
       })

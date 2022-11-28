@@ -30,6 +30,7 @@ export default function ProductCard(props) {
       }).then((result) => {
         if (result.isConfirmed) {
           navigate("/sign-in");
+          return;
         }
       });
 
@@ -46,6 +47,7 @@ export default function ProductCard(props) {
         displayAlert();
       })
       .catch((err) => {
+        console.log(err.response);
         if (err.response.status === 404 || err.response.status === 422) {
           Swal.fire({
             title: "Faça login para adicionar ao carrinho",
