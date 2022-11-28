@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { BsCartPlus } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { numberToFormatBrl } from "../utils/vanillaFunctions";
+import { addCart } from "../services/api";
 
 export default function ProductCard(props) {
   const navigate = useNavigate();
+
+  
+
 
   const { displayAlert } = props;
   const { _id, description, name, value, image } = props.product;
@@ -13,6 +17,25 @@ export default function ProductCard(props) {
     navigate(`/product/${_id}`, {
       state: { image, name, value, description },
     });
+    
+    
+    function cartAdd(){
+      const body = {
+        _id: _id,
+        quantity: 1,
+      }
+      addCart(body)
+        .then((res)=>{
+          displayAlert()
+        })
+        .catch((err)=>{
+          if(err.message === "Request failed with status code 404"){
+            navigate("/sign-in")
+          }
+          console.log(err.message)
+        })
+    }
+
 
   return (
     <Card>
@@ -26,8 +49,11 @@ export default function ProductCard(props) {
           <ProductPrice>{numberToFormatBrl(value)}</ProductPrice>
         </div>
         <ButtonContainer>
-          <BuyButton>Comprar</BuyButton>
-          <CartButton onClick={displayAlert} className="icon">
+          <BuyButton onClick={()=>{
+            cartAdd()
+            navigate("/cart")
+          }}>Comprar</BuyButton>
+          <CartButton onClick={()=>cartAdd()} className="icon">
             <BsCartPlus />
           </CartButton>
         </ButtonContainer>
