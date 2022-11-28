@@ -30,15 +30,14 @@ export default function Cart() {
         </Total>
       </OrderInfo>
 
-      <Button onClick={() => navigate("/checkout")}>
-        <p>IR PARA O PAGAMENTO</p>
-      </Button>
+      <Button onClick={() => navigate("/checkout")}>IR PARA O PAGAMENTO</Button>
     </Background>
   );
 }
 
 const Background = styled.div`
   min-height: 100vh;
+  width: 100vw;
   max-width: 400px;
 
   margin: 0 auto;
@@ -118,26 +117,20 @@ const Total = styled.div`
 `;
 
 const Button = styled.div`
-  height: 49px;
-  width: 300px;
+  width: 100%;
+  max-width: 250px;
+
+  padding: 10px;
   border-radius: 8px;
   background-color: #073c47;
 
   margin-top: 45px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  align-self: center;
 
   cursor: pointer;
 
-  p {
-    font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: #ffefd6;
-  }
+  font-weight: 700;
+  color: #ffefd6;
 `;
