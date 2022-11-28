@@ -7,6 +7,7 @@ export default function QuantityButton({ quantity, setQuantity }) {
     if (quantity === "") return setQuantity("");
     if (quantity < 1 || isNaN(quantity)) return setQuantity(1);
     if (quantity > 99) return setQuantity(99);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity]);
 
   return (

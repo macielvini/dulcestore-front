@@ -1,13 +1,17 @@
 import { useState } from "react";
 import * as AiIcons from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import QuantityButton from "../../components/QuantityButton";
+import { numberToFormatBrl } from "../../utils/vanillaFunctions";
 
 export default function ProductPage() {
-  const [quantity, setQuantity] = useState(1);
-
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = useParams();
+  const { image, name, value, description } = location.state;
+
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <>
@@ -16,50 +20,18 @@ export default function ProductPage() {
           <AiIcons.AiOutlineArrowLeft onClick={() => navigate(-1)} />
         </BackButton>
         <ImageContainer>
-          <img
-            src="https://images.unsplash.com/photo-1580480055273-228ff5388ef8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-            alt="foto do produto"
-          />
+          <img src={image} alt="foto do produto" />
         </ImageContainer>
         <ProductInfo>
-          <h1>Titulo do produto</h1>
+          <h1>{name}</h1>
           <PriceContainer>
-            <p>R$ 10000</p>
+            <p>{numberToFormatBrl(value)}</p>
             <QuantityButton quantity={quantity} setQuantity={setQuantity} />
           </PriceContainer>
           <AddToCartButton>Adicionar ao carrinho</AddToCartButton>
           <ProductDetails>
             <p>Detalhes</p>
-            <Details>
-              A poltrona Nina traz muita segurança e conforto para seu ambiente.
-              Sua estrutura é 100% em madeira Eucalipto e todo conforto se deve
-              a espuma com densidade D-23. Com um design sofisticado, a poltrona
-              Nina conta com acabamento em Suede. Após a sua compra, produto
-              passará por PROCESSO DE FABRICAÇÃO. Qual o material utilizado? -
-              Tecidos Suede; - Espuma D-23; - Percintas elásticas; - Estrutura
-              100% madeira; - Pés madeira de eucalipto. Para quem indicamos? -
-              Para os amantes da LEITURA - Para trazer conforto na hora da
-              AMAMENTAÇÃO; - Para trazer sofisticação para SALA DE ESTAR - Para
-              trazer aconchego em seu QUARTO - Para proporcionar comodidade ao
-              seu ESCRITÓRIO ou HOME OFFICE Garantia de fábrica de 03 meses
-              contra defeito de fabricação Modo de limpeza - Limpar com pano
-              limpo e moderadamente úmido Observações importantes: -Todos os
-              produtos vão embalados com total segurança. - Não nos
-              responsabilizamos por montagens, subidas em escadas ou similares
-              no ato da entrega. - Pode haver alguma diferença de tonalidade
-              entre a imagem e o produto, por conta do tratamento de imagens e a
-              calibração de cores da sua tela. Dimensões Altura: 87 cm Largura:
-              61 cm Profundidade: 60 cm Peso: 9,5 kg Tecido Suede 100%
-              poliéster. Informações de Envio. - Produto montado, sendo
-              necessário apenas rosquear os pés. - Nossos produtos são embalados
-              com até 02 Poltronas Nina por volume. Informamos a nossos clientes
-              que devido a paralisação das rodovias em todo Brasil, muitos de
-              nossos pedidos a serem enviados em breve, os que já estão a
-              caminho e os próximos pedidos a serem enviados, poderão sofrer
-              impacto de atrasos. Faremos nosso trabalho de envio normal e assim
-              que as estradas liberarem, as mercadorias seguirão rota
-              normalmente.
-            </Details>
+            <Details>{description}</Details>
           </ProductDetails>
         </ProductInfo>
       </Container>

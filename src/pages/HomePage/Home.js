@@ -3,7 +3,6 @@ import ProductCard from "../../components/ProductCard";
 import Navbar from "../../components/Navbar";
 import { getProductList } from "../../services/api";
 import { useEffect, useState } from "react";
-import { numberToFormatBrl } from "../../utils/vanillaFunctions";
 import { TailSpin } from "react-loader-spinner";
 
 export default function Home() {
@@ -33,14 +32,11 @@ export default function Home() {
       <PageContainer>
         <ProductsContainer $loading={productList.length < 1}>
           {productList.length > 0 ? (
-            productList.map((product) => (
+            productList.map((p) => (
               <ProductCard
-                key={product._id}
-                id={product._id}
-                imageSource={product.image}
-                name={product.name}
-                price={numberToFormatBrl(product.value)}
+                key={p._id}
                 displayAlert={displayAlert}
+                product={p}
               />
             ))
           ) : (
